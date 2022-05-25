@@ -1,11 +1,10 @@
 const express = require('express');
-const app = express();
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const router = express.Router();
 
 // instance
-var instance = new Razorpay({ key_id: 'YOUR_KEY_ID', key_secret: 'YOUR_SECRET' })
+var instance = new Razorpay({ key_id: 'rzp_test_D7x72eDr40GU7W', key_secret: 'Up12BxOaUtnpJJYhbY9E6oop' })
 
 // create order
 router.post('/order', async(req, res) => {
@@ -29,7 +28,7 @@ router.post('/verify',async(req,res)=>{
              amount,
              currency
          }= req.body
-         const signature = crypto.createHmac('sha256','secrete key');
+         const signature = crypto.createHmac('sha256','Up12BxOaUtnpJJYhbY9E6oop');
          signature.update(`${orderCreateId}|${razorpayPaymentId}`)
          const digest = signature.digest('hex')
          if(digest !== razorpaySignature ) return res.status(400).json({msg:'something bad error'})
